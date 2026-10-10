@@ -1,9 +1,10 @@
 import { invoke } from "@tauri-apps/api/core"
 import { useState } from "react"
-import reactLogo from "./assets/react.svg"
-import "./App.css"
+import { Button } from "@/components/ui/button.tsx"
+import { Input } from "@/components/ui/input.tsx"
+import reactLogo from "../../assets/react.svg"
 
-function App() {
+function Root() {
 	const [greetMsg, setGreetMsg] = useState("")
 	const [name, setName] = useState("")
 
@@ -31,21 +32,21 @@ function App() {
 
 			<form
 				className="row"
-				onSubmit={(e) => {
+				onSubmit={async (e) => {
 					e.preventDefault()
-					greet()
+					await greet()
 				}}
 			>
-				<input
+				<Input
 					id="greet-input"
 					onChange={(e) => setName(e.currentTarget.value)}
 					placeholder="Enter a name..."
 				/>
-				<button type="submit">Greet</button>
+				<Button type="submit">Greet</Button>
 			</form>
 			<p>{greetMsg}</p>
 		</main>
 	)
 }
 
-export default App
+export default Root

@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router"
-import App from "@/App.tsx"
+import Root from "@/features/root/Root.tsx"
 
 export const Route = createFileRoute("/")({
 	component: RouteComponent,
 })
 
 function RouteComponent() {
-	return <App />
+	return <Root />
 }

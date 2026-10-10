@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
-import { AppRootLayout } from "@/components/layout/app/app-root-layout.tsx"
+import { AppLayout } from "@/components/layout/app/app-layout.tsx"
 
 export const Route = createFileRoute("/app")({
 	component: RouteComponent,
@@ -7,8 +7,8 @@ export const Route = createFileRoute("/app")({
 
 function RouteComponent() {
 	return (
-		<AppRootLayout>
+		<AppLayout>
 			<Outlet />
-		</AppRootLayout>
+		</AppLayout>
 	)
 }
