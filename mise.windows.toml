@@ -1,0 +1,6 @@
+# window 下运行：
+# mise activate pwsh| Out-String | Invoke-Expression
+# macos 下运行：
+# eval "$(mise activate bash)"
+[env]
+_.path = ["C:/Program Files/Git/bin"]
