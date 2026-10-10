@@ -1,0 +1,56 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		// 跳过不支持的文件类型
+		"ignoreUnknown": true,
+		"includes": [
+			"**",
+			// tanstack router 自动生成的路由树
+			"!**/routeTree.gen.ts",
+			// 构建产物
+			"!!**/dist",
+			// shadcn组件
+			"!**/components/ui"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		// 代码换行宽度
+		"lineWidth": 100
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended"
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			// 分号
+			"semicolons": "asNeeded",
+			// 结尾逗号
+			"trailingCommas": "all"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"css": {
+		"parser": {
+			// 启用tailwindcss语法支持
+			"tailwindDirectives": true
+		}
+	}
+}
