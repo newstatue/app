@@ -1,0 +1,13 @@
+{% if version and version.tag -%}
+## {{ version.tag }} - {{ date | split(pat="T") | first }}
+{% else -%}
+## 未发布 / Unreleased
+{% endif %}
+{% for group in commits | group_by_type %}
+### {{ group.0 | upper_first }}
+{% for commit in group.1 -%}
+{% if not version.tag or commit.summary != version.tag -%}
+- {{ commit.summary }} - ({{ commit.id | truncate(length=7, end="") }}) - {{ commit.signature }}
+{% endif -%}
+{% endfor %}
+{% endfor %}

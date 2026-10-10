@@ -1,15 +1,18 @@
-from_latest_tag = false
-ignore_merge_commits = false
-ignore_fixup_commits = false
+tag_prefix = "v"
+from_latest_tag = true
+ignore_merge_commits = true
+ignore_fixup_commits = true
 disable_changelog = false
 disable_bump_commit = false
-generate_mono_repository_global_tag = true
-generate_mono_repository_package_tags = true
 branch_whitelist = []
 pre = "alpha.*"
 skip_ci = "[skip ci]"
 skip_untracked = false
-pre_bump_hooks = []
+pre_bump_hooks = [
+    "cargo set-version --manifest-path src-tauri/Cargo.toml {{version}}",
+    "npm version {{version}} --no-git-tag-version",
+    "git add src-tauri/Cargo.toml src-tauri/Cargo.lock package.json"
+]
 post_bump_hooks = []
 pre_package_bump_hooks = []
 post_package_bump_hooks = []
@@ -17,9 +20,21 @@ post_package_bump_hooks = []
 [git_hooks]
 
 [commit_types]
+feat = { changelog_title = "新功能 / Features" }
+fix = { changelog_title = "问题修复 / Bug Fixes" }
+chore = { changelog_title = "日常维护 / Maintenance" }
+docs = { changelog_title = "文档更新 / Documentation" }
+refactor = { changelog_title = "代码重构 / Refactoring" }
+perf = { changelog_title = "性能优化 / Performance" }
+build = { changelog_title = "构建系统 / Build" }
+ci = { changelog_title = "持续集成 / CI" }
+test = { changelog_title = "测试 / Tests" }
+style = { changelog_title = "代码格式 / Styling" }
+revert = { changelog_title = "撤销变更 / Reverts" }
 
 [changelog]
 path = "CHANGELOG.md"
+template = "changelog.tera"
 authors = []
 
 [bump_profiles]

@@ -1,4 +1,14 @@
 [tools]
 bun = "1.4.0"
 cocogitto = "7.0.0"
-tauri-cli = "2.12.1"
+"cargo:cargo-edit" = "0.13.13"
+
+# window 下运行：
+# mise activate pwsh| Out-String | Invoke-Expression
+# macos 下运行：
+# eval "$(mise activate bash)"
+[env]
+_.path = ["C:/Program Files/Git/bin"]
+
+[tasks.dev]
+run = "bun run tauri dev"
