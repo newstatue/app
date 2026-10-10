@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.0.1 - 2026-10-10
+
+
+### 日常维护 / Maintenance
+- init project version sync config - (e14011c) - newstatue
+- init - (6f364e2) - newstatue
+
+
+
+- - -
+
 
 
 - - -
