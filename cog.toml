@@ -18,6 +18,22 @@ pre_package_bump_hooks = []
 post_package_bump_hooks = []
 
 [git_hooks]
+[git_hooks.pre-commit]
+script = """#!/bin/sh
+set -eu
+
+# 检查暂存文件是否还存在未暂存的修改
+if git status --short | grep -q '^MM'; then
+    echo "ERROR: Some staged files have unstaged changes" >&2
+    exit 1
+fi
+
+# 格式化暂存文件、整理导入、应用安全修复
+bunx biome check --write --staged --files-ignore-unknown=true --no-errors-on-unmatched
+
+# 重新暂存格式化后的内容
+git update-index --again
+"""
 
 [commit_types]
 feat = { changelog_title = "新功能 / Features" }

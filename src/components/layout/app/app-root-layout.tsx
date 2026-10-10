@@ -1,5 +1,5 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/layout/app/app-sidebar.tsx"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar.tsx"
 
 export function AppRootLayout({ children }: { children: React.ReactNode }) {
 	return (

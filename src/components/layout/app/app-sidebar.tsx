@@ -4,7 +4,7 @@ import {
 	SidebarFooter,
 	SidebarGroup,
 	SidebarHeader,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar.tsx"
 
 export function AppSidebar() {
 	return (
