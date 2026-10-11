@@ -1,0 +1,17 @@
+{
+	"app": {
+		"windows": [
+			{
+				"title": "app",
+				"transparent": true,
+				"width": 800,
+				"height": 600,
+				"decorations": false,
+				"windowEffects": {
+					"effects": ["mica"],
+					"state": "active"
+				}
+			}
+		]
+	}
+}
