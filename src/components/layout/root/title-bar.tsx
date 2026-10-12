@@ -14,8 +14,17 @@ interface TitleBarMenuProps {
 
 export function TitleBar({ menu }: TitleBarMenuProps) {
 	return (
-		<header data-tauri-drag-region className={"relative flex items-center justify-center h-11"}>
-			<Menubar className={cn("absolute", isMacOSPlatform() ? "left-20" : "left-2")}>{menu}</Menubar>
+		<header
+			data-tauri-drag-region
+			className="relative flex h-11 w-full shrink-0 items-center justify-center pb-1 text-foreground/50"
+		>
+			<Menubar className={cn("absolute border-0",
+				"**:data-[slot=menubar-trigger]:hover:bg-foreground/5",
+				"**:data-[slot=menubar-trigger]:aria-expanded:bg-foreground/5",
+				isMacOSPlatform() ? "left-20" : "left-3")}
+			>
+				{menu}
+			</Menubar>
 
 			<span className="pointer-events-none text-sm font-medium">Evorsio</span>
 
@@ -37,3 +46,4 @@ export function TitleBar({ menu }: TitleBarMenuProps) {
 		</header>
 	)
 }
+
