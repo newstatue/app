@@ -9,16 +9,7 @@
 		"frontendDist": "../dist"
 	},
 	"app": {
-		"windows": [
-			{
-				"title": "app",
-				"titleBarStyle": "Overlay",
-				"hiddenTitle": true,
-				"transparent": true,
-				"width": 800,
-				"height": 600
-			}
-		],
+		"windows": [{}],
 		"security": {
 			"csp": null
 		}

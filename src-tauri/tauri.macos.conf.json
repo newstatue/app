@@ -2,6 +2,16 @@
 	"app": {
 		"windows": [
 			{
+				"title": "app",
+				"titleBarStyle": "Overlay",
+				"hiddenTitle": true,
+				"transparent": true,
+				"trafficLightPosition": {
+					"x": 16,
+					"y": 24
+				},
+				"width": 800,
+				"height": 600,
 				"windowEffects": {
 					"effects": ["sidebar"],
 					"state": "active"
