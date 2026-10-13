@@ -5,27 +5,25 @@ import { isMobilePlatform } from "@/lib/platform"
 const SIDEBAR_BREAKPOINT = 768
 
 export function useSidebarCollapse() {
-    const { setOpen } = useSidebar()
-    const setOpenRef = React.useRef(setOpen)
+	const { setOpen } = useSidebar()
+	const setOpenRef = React.useRef(setOpen)
 
-    React.useEffect(() => {
-        setOpenRef.current = setOpen
-    }, [setOpen])
+	React.useEffect(() => {
+		setOpenRef.current = setOpen
+	}, [setOpen])
 
-    React.useEffect(() => {
-        if (isMobilePlatform()) return
+	React.useEffect(() => {
+		if (isMobilePlatform()) return
 
-        const mql = window.matchMedia(
-            `(max-width: ${SIDEBAR_BREAKPOINT - 1}px)`
-        )
+		const mql = window.matchMedia(`(max-width: ${SIDEBAR_BREAKPOINT - 1}px)`)
 
-        const onChange = () => {
-            setOpenRef.current(!mql.matches)
-        }
+		const onChange = () => {
+			setOpenRef.current(!mql.matches)
+		}
 
-        mql.addEventListener("change", onChange)
-        onChange()
+		mql.addEventListener("change", onChange)
+		onChange()
 
-        return () => mql.removeEventListener("change", onChange)
-    }, [])
+		return () => mql.removeEventListener("change", onChange)
+	}, [])
 }

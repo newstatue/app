@@ -20,14 +20,30 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar.tsx"
-import {Clock, FileText, Folder, Home, Settings, Star, User, ChevronDown, Plus} from "lucide-react"
-import { useState } from "react"
+import {
+	Clock,
+	FileText,
+	Folder,
+	Home,
+	Settings,
+	Star,
+	User,
+	ChevronDown,
+	Plus,
+} from "lucide-react"
+import { useCallback, useEffect, useState } from "react"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu.tsx";
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu.tsx"
+import type { Project } from "@/bindings/Project.ts"
+import { invoke } from "@tauri-apps/api/core"
+import { ScrollArea } from "@/components/ui/scroll-area.tsx"
+import { toast } from "@/components/ui/toast.tsx"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 const sidebarGroups = [
 	{
@@ -51,6 +67,22 @@ const sidebarGroups = [
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
 	const [activeItem, setActiveItem] = useState("home")
+	const [projects, setProjects] = useState<Project[]>([])
+
+	const refreshProjects = useCallback(async () => {
+		const result = await invoke<Project[]>("list_projects")
+		setProjects(result)
+	}, [])
+
+	useEffect(() => {
+		void refreshProjects().catch((error) => {
+			toast.add({
+				type: "error",
+				data: `Failed to refresh projects: ${String(error)}`,
+			})
+		})
+	}, [refreshProjects])
+
 	return (
 		<div className="flex h-full min-h-0 flex-col">
 			<SidebarProvider
@@ -59,9 +91,13 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 			has-data-[variant=inset]:bg-transparent
 			**:data-[slot=sidebar]:block!"
 			>
-				<TitleBar menu={
+				<TitleBar
+					menu={
 						<div className="flex items-center gap-2">
-							<SidebarTrigger size="icon" className="hover:bg-foreground/5 aria-expanded:bg-foreground/5"/>
+							<SidebarTrigger
+								size="icon"
+								className="hover:bg-foreground/5 aria-expanded:bg-foreground/5"
+							/>
 							<MenubarMenu>
 								<MenubarTrigger>文件</MenubarTrigger>
 								<MenubarContent>
@@ -92,12 +128,28 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 									<DropdownMenu>
 										<DropdownMenuTrigger render={<SidebarMenuButton />}>
 											<Folder />
-											<span>项目</span>
+											<span>Projects</span>
 											<ChevronDown className="ml-auto group-data-[collapsible=icon]:hidden" />
 										</DropdownMenuTrigger>
 										<DropdownMenuContent>
+											<ScrollArea className="h-50">
+												{projects.map((project) => (
+													<Tooltip>
+														<TooltipTrigger
+															render={<DropdownMenuItem key={project.path} className="min-w-0" />}
+														>
+															<span className="shrink-0 font-medium">{project.name}</span>
+														</TooltipTrigger>
+														<TooltipContent side="right" align="center">
+															<p className="max-w-80 break-all">{project.path}</p>
+														</TooltipContent>
+													</Tooltip>
+												))}
+											</ScrollArea>
+											<DropdownMenuSeparator />
 											<DropdownMenuItem>
-												<Plus/><span>新建项目</span>
+												<Plus />
+												<span>New Project</span>
 											</DropdownMenuItem>
 										</DropdownMenuContent>
 									</DropdownMenu>
@@ -108,7 +160,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 							{sidebarGroups.map((group) => (
 								<SidebarGroup key={group.label}>
 									<SidebarGroupLabel>{group.label}</SidebarGroupLabel>
-									<SidebarMenu  className="gap-1">
+									<SidebarMenu className="gap-1">
 										{group.items.map((item) => (
 											<SidebarMenuItem key={item.id}>
 												<SidebarMenuButton
@@ -138,11 +190,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 								<SidebarMenuItem>
-									<SidebarMenuButton
-										tooltip="本地用户"
-										size="lg"
-										disabled
-									>
+									<SidebarMenuButton tooltip="本地用户" size="lg" disabled>
 										<User />
 										<span>本地用户</span>
 									</SidebarMenuButton>
@@ -159,4 +207,3 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 		</div>
 	)
 }
-

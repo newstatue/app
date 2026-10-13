@@ -18,10 +18,13 @@ export function TitleBar({ menu }: TitleBarMenuProps) {
 			data-tauri-drag-region
 			className="relative flex h-11 w-full shrink-0 items-center justify-center pb-1 text-foreground/50"
 		>
-			<Menubar className={cn("absolute border-0",
-				"**:data-[slot=menubar-trigger]:hover:bg-foreground/5",
-				"**:data-[slot=menubar-trigger]:aria-expanded:bg-foreground/5",
-				isMacOSPlatform() ? "left-20" : "left-3")}
+			<Menubar
+				className={cn(
+					"absolute border-0",
+					"**:data-[slot=menubar-trigger]:hover:bg-foreground/5",
+					"**:data-[slot=menubar-trigger]:aria-expanded:bg-foreground/5",
+					isMacOSPlatform() ? "left-20" : "left-3",
+				)}
 			>
 				{menu}
 			</Menubar>
@@ -46,4 +49,3 @@ export function TitleBar({ menu }: TitleBarMenuProps) {
 		</header>
 	)
 }
-
