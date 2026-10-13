@@ -15,7 +15,9 @@
 			// 构建产物
 			"!!**/dist",
 			// shadcn组件
-			"!**/components/ui"
+			"!**/components/ui",
+			// ts-rs生成bindings
+			"!**/bindings"
 		]
 	},
 	"formatter": {

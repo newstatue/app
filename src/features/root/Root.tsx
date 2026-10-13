@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button.tsx"
 import { Input } from "@/components/ui/input.tsx"
 import reactLogo from "../../assets/react.svg"
 
-function Root() {
+export default function Root() {
 	const [greetMsg, setGreetMsg] = useState("")
 	const [name, setName] = useState("")
 
@@ -48,5 +48,3 @@ function Root() {
 		</main>
 	)
 }
-
-export default Root
