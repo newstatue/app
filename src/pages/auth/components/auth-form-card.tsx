@@ -29,7 +29,7 @@ export function AuthFormCard({
 				void onSubmit();
 			}}
 		>
-			<Card className="w-full gap-6 p-6 sm:p-8">
+			<Card className="w-full gap-6 p-6">
 				<Card.Header className="items-center gap-2 text-center">
 					<Card.Title className="text-xl font-semibold tracking-tight">
 						{title}

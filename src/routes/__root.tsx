@@ -32,10 +32,27 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "TanStack Start Starter",
+				title: "Evorsio",
 			},
 		],
 		links: [
+			{
+				rel: "icon",
+				type: "image/png",
+				href: "/favicon.png",
+			},
+			{
+				rel: "icon",
+				type: "image/svg+xml",
+				href: "/favicon.svg",
+				media: "(prefers-color-scheme: light)",
+			},
+			{
+				rel: "icon",
+				type: "image/svg+xml",
+				href: "/favicon_light.svg",
+				media: "(prefers-color-scheme: dark)",
+			},
 			{
 				rel: "stylesheet",
 				href: appCss,

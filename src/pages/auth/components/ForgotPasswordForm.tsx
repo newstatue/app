@@ -1,4 +1,3 @@
-import { AuthFormCard, AuthSubmitButton } from "./AuthFormCard";
 import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
@@ -6,6 +5,7 @@ import { toast } from "@heroui/react";
 import { FieldError, Input, Label, TextField } from "@heroui/react";
 
 import { authClient } from "@/lib/auth-client";
+import {AuthFormCard, AuthSubmitButton} from "#/pages/auth/components/auth-form-card.tsx";
 
 const formSchema = z.object({
 	email: z.email({
