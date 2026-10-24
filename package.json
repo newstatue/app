@@ -25,6 +25,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
+    "@gravity-ui/icons": "^2.23.0",
     "@heroui/react": "^3.2.6",
     "@heroui/styles": "^3.2.6",
     "@t3-oss/env-core": "^0.13.10",
@@ -43,6 +44,7 @@
     "drizzle-orm": "^0.45.1",
     "next-themes": "^0.4.6",
     "react": "^19.2.0",
+    "react-aria-components": "^1.22.1",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.18",
     "zod": "^4.3.6"
@@ -88,4 +90,3 @@
     ]
   }
 }
-

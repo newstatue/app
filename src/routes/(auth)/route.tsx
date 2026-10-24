@@ -1,17 +1,14 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { Logo } from "#/pages/root/logo.tsx";
+import { AuthLayout } from "#/pages/auth/AuthLayout";
 
 export const Route = createFileRoute("/(auth)")({
-	component: AuthLayout,
+	component: AuthRoute,
 });
 
-function AuthLayout() {
+function AuthRoute() {
 	return (
-		<main className="relative flex min-h-svh items-center justify-center px-4 py-20">
-			<div className="absolute left-8 top-8">
-				<Logo showText />
-			</div>
+		<AuthLayout>
 			<Outlet />
-		</main>
+		</AuthLayout>
 	);
 }

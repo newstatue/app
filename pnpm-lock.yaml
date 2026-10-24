@@ -166,6 +166,9 @@ importers:
 
   .:
     dependencies:
+      '@gravity-ui/icons':
+        specifier: ^2.23.0
+        version: 2.23.0(react@19.3.1)
       '@heroui/react':
         specifier: ^3.2.6
         version: 3.2.6(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.3)
@@ -220,6 +223,9 @@ importers:
       react:
         specifier: ^19.2.0
         version: 19.3.1
+      react-aria-components:
+        specifier: ^1.22.1
+        version: 1.22.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react-dom:
         specifier: ^19.2.0
         version: 19.3.1(react@19.3.1)
@@ -1096,6 +1102,14 @@ packages:
 
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
+
+  '@gravity-ui/icons@2.23.0':
+    resolution: {integrity: sha512-xy/upFefm889FJkfQ2/4QRH6t4Xdv1VVdtv7hRznGqz3bJsS+h2IHDctABbjjHC5qO032NWWul4wQ0c2vShE5A==}
+    peerDependencies:
+      react: '*'
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@heroui/react@3.2.6':
     resolution: {integrity: sha512-KBhUUUdX4571SSjwpuBPEFZTYAw/tmGezTIsTnjIOlXDZkjWACfhFe6ibtReO+xTkUcfxCV1r3cF00/3OPlhhw==}
@@ -4382,6 +4396,12 @@ snapshots:
       '@floating-ui/utils': 0.2.12
 
   '@floating-ui/utils@0.2.12': {}
+
+  '@gravity-ui/icons@2.23.0(react@19.3.1)':
+    dependencies:
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.3.1
 
   '@heroui/react@3.2.6(@internationalized/date@3.12.4)(@react-aria/ssr@3.10.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-aria/utils@3.34.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-aria-components@1.22.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-aria@3.53.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.3)':
     dependencies:

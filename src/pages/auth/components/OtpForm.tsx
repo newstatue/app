@@ -1,19 +1,23 @@
-import { toast } from "@heroui/react";
 import {
 	FieldError,
-	Label,
-	TextField,
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSeparator,
 	InputOTPSlot,
+	Label,
 	REGEXP_ONLY_DIGITS,
+	TextField,
+	toast,
 } from "@heroui/react";
-import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "@tanstack/react-form";
+import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
+import {
+	AuthFormCard,
+	AuthSubmitButton,
+} from "./AuthFormCard";
 import { authClient } from "@/lib/auth-client";
-import {AuthFormCard, AuthSubmitButton} from "#/pages/auth/components/auth-form-card.tsx";
+
 const formSchema = z.object({
 	otp: z.string().regex(/^\d{6}$/, "请输入六位数字验证码。"),
 });

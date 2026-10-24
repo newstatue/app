@@ -1,4 +1,4 @@
-import { SignupForm } from "./components/SignupForm.tsx";
+import { SignupForm } from "./components/SignupForm";
 
 export default function SignupPage() {
 	return <SignupForm />;

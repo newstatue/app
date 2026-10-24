@@ -11,11 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
+import { Route as AuthorizedRouteRouteImport } from './routes/_authorized/route'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authResetPasswordRouteImport } from './routes/(auth)/reset-password'
 import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
+import { Route as AuthorizedDashRouteRouteImport } from './routes/_authorized/dash/route'
+import { Route as AuthorizedDashIndexRouteImport } from './routes/_authorized/dash/index'
+import { Route as AuthorizedDashGuideRouteImport } from './routes/_authorized/dash/guide'
+import { Route as AuthorizedDashProjectsRouteImport } from './routes/_authorized/dash/projects'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -25,6 +30,10 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const authRouteRoute = authRouteRouteImport.update({
   id: '/(auth)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthorizedRouteRoute = AuthorizedRouteRouteImport.update({
+  id: '/_authorized',
   getParentRoute: () => rootRouteImport,
 } as any)
 const authForgotPasswordRoute = authForgotPasswordRouteImport.update({
@@ -52,6 +61,26 @@ const authSignUpRoute = authSignUpRouteImport.update({
   path: '/sign-up',
   getParentRoute: () => authRouteRoute,
 } as any)
+const AuthorizedDashRouteRoute = AuthorizedDashRouteRouteImport.update({
+  id: '/dash',
+  path: '/dash',
+  getParentRoute: () => AuthorizedRouteRoute,
+} as any)
+const AuthorizedDashIndexRoute = AuthorizedDashIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthorizedDashRouteRoute,
+} as any)
+const AuthorizedDashGuideRoute = AuthorizedDashGuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
+  getParentRoute: () => AuthorizedDashRouteRoute,
+} as any)
+const AuthorizedDashProjectsRoute = AuthorizedDashProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AuthorizedDashRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -60,12 +89,16 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dash': typeof AuthorizedDashRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/login': typeof authLoginRoute
   '/otp': typeof authOtpRoute
   '/reset-password': typeof authResetPasswordRoute
   '/sign-up': typeof authSignUpRoute
+  '/dash/guide': typeof AuthorizedDashGuideRoute
+  '/dash/projects': typeof AuthorizedDashProjectsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dash/': typeof AuthorizedDashIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -74,29 +107,41 @@ export interface FileRoutesByTo {
   '/otp': typeof authOtpRoute
   '/reset-password': typeof authResetPasswordRoute
   '/sign-up': typeof authSignUpRoute
+  '/dash/guide': typeof AuthorizedDashGuideRoute
+  '/dash/projects': typeof AuthorizedDashProjectsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dash': typeof AuthorizedDashIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(auth)': typeof authRouteRouteWithChildren
+  '/_authorized': typeof AuthorizedRouteRouteWithChildren
+  '/_authorized/dash': typeof AuthorizedDashRouteRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/reset-password': typeof authResetPasswordRoute
   '/(auth)/sign-up': typeof authSignUpRoute
+  '/_authorized/dash/guide': typeof AuthorizedDashGuideRoute
+  '/_authorized/dash/projects': typeof AuthorizedDashProjectsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/_authorized/dash/': typeof AuthorizedDashIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dash'
     | '/forgot-password'
     | '/login'
     | '/otp'
     | '/reset-password'
     | '/sign-up'
+    | '/dash/guide'
+    | '/dash/projects'
     | '/api/auth/$'
+    | '/dash/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -105,22 +150,31 @@ export interface FileRouteTypes {
     | '/otp'
     | '/reset-password'
     | '/sign-up'
+    | '/dash/guide'
+    | '/dash/projects'
     | '/api/auth/$'
+    | '/dash'
   id:
     | '__root__'
     | '/'
     | '/(auth)'
+    | '/_authorized'
+    | '/_authorized/dash'
     | '/(auth)/forgot-password'
     | '/(auth)/login'
     | '/(auth)/otp'
     | '/(auth)/reset-password'
     | '/(auth)/sign-up'
+    | '/_authorized/dash/guide'
+    | '/_authorized/dash/projects'
     | '/api/auth/$'
+    | '/_authorized/dash/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authRouteRoute: typeof authRouteRouteWithChildren
+  AuthorizedRouteRoute: typeof AuthorizedRouteRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -138,6 +192,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof authRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authorized': {
+      id: '/_authorized'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthorizedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)/forgot-password': {
@@ -175,6 +236,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignUpRouteImport
       parentRoute: typeof authRouteRoute
     }
+    '/_authorized/dash': {
+      id: '/_authorized/dash'
+      path: '/dash'
+      fullPath: '/dash'
+      preLoaderRoute: typeof AuthorizedDashRouteRouteImport
+      parentRoute: typeof AuthorizedRouteRoute
+    }
+    '/_authorized/dash/': {
+      id: '/_authorized/dash/'
+      path: '/'
+      fullPath: '/dash/'
+      preLoaderRoute: typeof AuthorizedDashIndexRouteImport
+      parentRoute: typeof AuthorizedDashRouteRoute
+    }
+    '/_authorized/dash/guide': {
+      id: '/_authorized/dash/guide'
+      path: '/guide'
+      fullPath: '/dash/guide'
+      preLoaderRoute: typeof AuthorizedDashGuideRouteImport
+      parentRoute: typeof AuthorizedDashRouteRoute
+    }
+    '/_authorized/dash/projects': {
+      id: '/_authorized/dash/projects'
+      path: '/projects'
+      fullPath: '/dash/projects'
+      preLoaderRoute: typeof AuthorizedDashProjectsRouteImport
+      parentRoute: typeof AuthorizedDashRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -205,9 +294,37 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
   authRouteRouteChildren,
 )
 
+interface AuthorizedDashRouteRouteChildren {
+  AuthorizedDashGuideRoute: typeof AuthorizedDashGuideRoute
+  AuthorizedDashProjectsRoute: typeof AuthorizedDashProjectsRoute
+  AuthorizedDashIndexRoute: typeof AuthorizedDashIndexRoute
+}
+
+const AuthorizedDashRouteRouteChildren: AuthorizedDashRouteRouteChildren = {
+  AuthorizedDashGuideRoute: AuthorizedDashGuideRoute,
+  AuthorizedDashProjectsRoute: AuthorizedDashProjectsRoute,
+  AuthorizedDashIndexRoute: AuthorizedDashIndexRoute,
+}
+
+const AuthorizedDashRouteRouteWithChildren =
+  AuthorizedDashRouteRoute._addFileChildren(AuthorizedDashRouteRouteChildren)
+
+interface AuthorizedRouteRouteChildren {
+  AuthorizedDashRouteRoute: typeof AuthorizedDashRouteRouteWithChildren
+}
+
+const AuthorizedRouteRouteChildren: AuthorizedRouteRouteChildren = {
+  AuthorizedDashRouteRoute: AuthorizedDashRouteRouteWithChildren,
+}
+
+const AuthorizedRouteRouteWithChildren = AuthorizedRouteRoute._addFileChildren(
+  AuthorizedRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authRouteRoute: authRouteRouteWithChildren,
+  AuthorizedRouteRoute: AuthorizedRouteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
