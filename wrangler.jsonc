@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
+  "name": "app",
   "compatibility_date": "2025-09-02",
   "compatibility_flags": [
     "nodejs_compat"
@@ -20,5 +20,17 @@
       "name": "EMAIL",
       "remote": true
     }
-  ]
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
+  },
+  "secrets": {
+    "required": [
+      "BETTER_AUTH_SECRET"
+    ]
+  }
 }
